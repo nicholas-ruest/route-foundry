@@ -1,0 +1,16 @@
+[package]
+name = "rf-ruvector"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+rf-embedding = { path = "../rf-embedding" }
+rf-errors = { path = "../rf-errors" }
+rf-types = { path = "../rf-types" }
+ruvector-core = { workspace = true }
+serde_json = { workspace = true }
+
+[lints]
+workspace = true

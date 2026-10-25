@@ -1,0 +1,12 @@
+[package]
+name="rf-embedding"
+version.workspace=true
+edition.workspace=true
+rust-version.workspace=true
+license.workspace=true
+[dependencies]
+rf-workload={path="../rf-workload"}
+rf-types={path="../rf-types"}
+sha2={workspace=true}
+[lints]
+workspace=true

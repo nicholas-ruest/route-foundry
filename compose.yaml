@@ -1,0 +1,12 @@
+services:
+  api:
+    build: .
+    command: ["serve","--addr","0.0.0.0:8080"]
+    environment: ["RF_DATA_DIR=/data"]
+    volumes: ["rf-data:/data"]
+    ports: ["18080:8080"]
+  web:
+    build: ./frontend
+    ports: ["14273:14273"]
+    depends_on: [api]
+volumes: {rf-data: {}}

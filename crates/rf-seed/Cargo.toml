@@ -1,0 +1,13 @@
+[package]
+name="rf-seed"
+version.workspace=true
+edition.workspace=true
+rust-version.workspace=true
+license.workspace=true
+[dependencies]
+rf-orchestrator={path="../rf-orchestrator"}
+rf-provider={path="../rf-provider"}
+rf-types={path="../rf-types"}
+rf-workload={path="../rf-workload"}
+[lints]
+workspace=true

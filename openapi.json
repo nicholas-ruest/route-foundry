@@ -1,0 +1,99 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Route Foundry API",
+    "version": "1.0.0",
+    "description": "Typed API for audit-constrained adaptive inference routing.",
+    "license": {
+      "name": "Apache-2.0",
+      "identifier": "Apache-2.0"
+    }
+  },
+  "paths": {
+    "/api/v1/routes": {
+      "post": {
+        "operationId": "routeWorkload",
+        "responses": {
+          "200": {
+            "description": "routing result"
+          },
+          "403": {
+            "description": "policy denial"
+          },
+          "422": {
+            "description": "invalid"
+          }
+        },
+        "summary": "Route a workload",
+        "tags": [
+          "Routing"
+        ]
+      }
+    },
+    "/api/v1/routes/{id}": {
+      "get": {
+        "operationId": "getRoute",
+        "responses": {
+          "200": {
+            "description": "durable result"
+          }
+        },
+        "summary": "Retrieve a saved routing result",
+        "tags": [
+          "Routing"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/audit": {
+      "get": {
+        "operationId": "getAudit",
+        "responses": {
+          "200": {
+            "description": "audit"
+          }
+        },
+        "summary": "List append-only audit evidence",
+        "tags": [
+          "Routing"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:18080",
+      "description": "Local prototype"
+    }
+  ],
+  "security": [
+    {
+      "DevSession": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "DevSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "rf_session",
+        "description": "Prototype session cookie."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Routing",
+      "description": "Inference routing and durable evidence."
+    }
+  ]
+}

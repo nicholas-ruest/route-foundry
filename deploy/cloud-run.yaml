@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata: {name: route-foundry}
+spec:
+  template:
+    spec:
+      containerConcurrency: 40
+      timeoutSeconds: 15
+      containers:
+        - image: IMAGE_DIGEST_REQUIRES_AUTHORIZATION
+          ports: [{containerPort: 8080}]
+          env: [{name: RF_DATA_DIR, value: /tmp/data}]

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cookie="Cookie: rf_session=steward";before=$(curl -fsS -H "$cookie" http://127.0.0.1:18080/api/v1/routes/journey-restart|sha256sum|cut -d" " -f1);kill "$(cat .run/backend.pid)";wait "$(cat .run/backend.pid)" 2>/dev/null||true;cargo run --locked -p rf-cli -- --data-dir .route-foundry-data serve --addr 127.0.0.1:18080 >.run/backend.log 2>&1 & echo $! >.run/backend.pid;for _ in $(seq 1 60);do curl -fsS http://127.0.0.1:18080/readyz >/dev/null 2>&1&&break;sleep 1;done;after=$(curl -fsS -H "$cookie" http://127.0.0.1:18080/api/v1/routes/journey-restart|sha256sum|cut -d" " -f1);test "$before" = "$after";echo RESTART_RETRIEVAL_PASS
