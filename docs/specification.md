@@ -1,0 +1,7 @@
+# Route Foundry specification
+
+Route Foundry gives AI platform teams a bounded product for choosing an inference route without allowing cost or quality optimization to bypass data-handling policy. A `RoutingWorkload` contains a safe identifier, task text, data class, required region, maximum cost, maximum latency, and minimum quality. A `ProviderCandidate` contains observed quality samples, health, residency, external-processing status, cost, latency, and prior pulls.
+
+The primary command is `POST /api/v1/routes`. Authentication, idempotency, request validation, and Regorus authorization execute before the orchestrator. The orchestrator filters hard constraints, computes a finite-sample split-conformal lower quality bound, retrieves similar prior routes from RuVector, scores the feasible candidates, executes the selected deterministic synthetic adapter, and appends decision and audit records through RVF. `GET /api/v1/routes/{id}` reads the durable result; `GET /api/v1/audit` returns the append-only trail.
+
+Success means all three journeys execute against the running React UI and real Rust service, the two Ruvnet boundaries and Regorus are exercised, the final candidate passes Rust/Node/security/contract checks, and evidence is bound to the tested SHA. Real provider credentials are intentionally absent: provider responses are deterministic, conspicuously labelled synthetic fixtures; the routing, policy, intelligence, and persistence paths are real.

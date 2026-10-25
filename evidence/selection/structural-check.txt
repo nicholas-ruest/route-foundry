@@ -1,0 +1,1 @@
+STRUCTURAL_DESIGN_PASS crates=24 adrs=25 ddds=12
