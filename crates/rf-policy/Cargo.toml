@@ -1,0 +1,14 @@
+[package]
+name="rf-policy"
+version.workspace=true
+edition.workspace=true
+rust-version.workspace=true
+license.workspace=true
+[dependencies]
+rf-errors={path="../rf-errors"}
+rf-provider={path="../rf-provider"}
+rf-regorus={path="../rf-regorus"}
+rf-types={path="../rf-types"}
+rf-workload={path="../rf-workload"}
+[lints]
+workspace=true

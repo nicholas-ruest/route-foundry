@@ -1,0 +1,12 @@
+[package]
+name="rf-workload"
+version.workspace=true
+edition.workspace=true
+rust-version.workspace=true
+license.workspace=true
+[dependencies]
+rf-errors={path="../rf-errors"}
+rf-types={path="../rf-types"}
+serde={workspace=true}
+[lints]
+workspace=true

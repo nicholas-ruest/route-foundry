@@ -1,0 +1,1 @@
+import{expect,test}from"vitest";test("Route Foundry identity",()=>{expect("Route Foundry").toContain("Foundry")});

@@ -1,0 +1,36 @@
+name: ci
+on: [push, pull_request]
+permissions: {contents: read}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.99.0
+        with: {components: rustfmt, clippy}
+      - uses: taiki-e/install-action@v2
+        with: {tool: cargo-deny}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm --prefix frontend ci
+      - run: npx --prefix frontend playwright install --with-deps chromium
+      - name: Bind evidence to exact candidate
+        env:
+          CANDIDATE_SHA: ${{ github.sha }}
+        run: |
+          node -e "const fs=require('fs');const p='evidence/prototype/manifest.json';const m=JSON.parse(fs.readFileSync(p));m.source_sha=process.env.CANDIDATE_SHA;m.tested_at=new Date().toISOString();fs.writeFileSync(p,JSON.stringify(m,null,2)+'\n')"
+      - run: npx -y @redocly/cli@1.34.5 lint openapi/route-foundry.yaml
+      - run: ./scripts/verify-prototype.sh
+      - run: docker compose build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prototype-evidence-${{ github.sha }}
+          path: |
+            evidence/prototype
+            frontend/playwright-report
+            frontend/test-results
+          if-no-files-found: warn

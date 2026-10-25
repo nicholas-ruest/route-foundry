@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "tested_source_sha": "719c4d0ff9993b3dbda8b4ba981389b8046167c9",
+  "generated_at": "2026-10-25T01:53:29Z",
+  "launch_mode": "local governed ruOS, real Axum plus Vite",
+  "test_namespace": "dream-machine/2026-10-24/route-foundry",
+  "dependencies": {
+    "rust": "1.99.1",
+    "node": "20.20.2",
+    "ruvector_core": "2.4.0",
+    "rvf_runtime": "0.3.2",
+    "regorus": "0.13.0",
+    "react": "19.3.1",
+    "playwright": "1.64.1"
+  },
+  "commands": [
+    {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo clippy --locked --workspace --all-targets --all-features -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo test --locked --workspace --all-features",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo deny check",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run typecheck && npm run lint && npm test && npm run build && npm run contract",
+      "exit_code": 0
+    },
+    {
+      "command": "npx playwright test",
+      "exit_code": 0
+    },
+    {
+      "command": "./scripts/restart-check.sh",
+      "exit_code": 0
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "evidence/prototype/desktop.png",
+      "sha256": "68e22b8af8b4cfc9ce2f0efeca71aa78e8f2bedbd070fe2e65c637a92393bb94"
+    },
+    {
+      "path": "evidence/prototype/mobile.png",
+      "sha256": "2754dfc853285efa691de88edb90968530adda79fa4f602ca3c243ce3e8f3f94"
+    },
+    {
+      "path": "frontend/playwright-report/index.html",
+      "sha256": "1ba2b5e8298e923bc65a8189afa5c9b5220938eb9e558ba9978b35ce84cecb8f"
+    }
+  ],
+  "correlation_trace": {
+    "workload_id": "journey-main",
+    "route": "POST /api/v1/routes",
+    "middleware": [
+      "rf-auth",
+      "rf-middleware"
+    ],
+    "application": "rf-orchestrator",
+    "upstreams": [
+      "Regorus",
+      "RuVector",
+      "RVF"
+    ],
+    "visible_result": "selected provider plus correlation_id"
+  },
+  "limitations": [
+    "provider output is deterministic synthetic fixture",
+    "dev-session cookie is not production identity",
+    "no cloud deployment was authorized"
+  ]
+}

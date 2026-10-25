@@ -1,0 +1,16 @@
+[package]
+name = "rf-audit"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+rf-errors = { path = "../rf-errors" }
+rf-types = { path = "../rf-types" }
+sha2 = { workspace = true }
+hex = { workspace = true }
+chrono = { workspace = true }
+
+[lints]
+workspace = true

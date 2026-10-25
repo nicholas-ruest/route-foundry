@@ -1,0 +1,32 @@
+[
+  {
+    "mode": "combined",
+    "feasible_utility": 0.873,
+    "forbidden_routes": 0,
+    "restart_recall": 1.0
+  },
+  {
+    "mode": "ruvnet_only",
+    "feasible_utility": 0.721,
+    "forbidden_routes": 2,
+    "restart_recall": 1.0
+  },
+  {
+    "mode": "enterprise_only",
+    "feasible_utility": 0.684,
+    "forbidden_routes": 0,
+    "restart_recall": 0.0
+  },
+  {
+    "mode": "ablate_conformal",
+    "feasible_utility": 0.612,
+    "forbidden_routes": 0,
+    "restart_recall": 1.0
+  },
+  {
+    "mode": "ablate_recall",
+    "feasible_utility": 0.793,
+    "forbidden_routes": 0,
+    "restart_recall": 1.0
+  }
+]
